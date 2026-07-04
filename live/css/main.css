@@ -73,12 +73,10 @@ nav#menu button:hover { border-color: var(--accent); color: var(--accent); }
   color: var(--accent);
   text-shadow: 0 0 20px rgba(243,194,118,.25);
 }
-.subtitle { color: var(--muted); margin: 0 0 22px; letter-spacing: .12em; }
-#lobby-form {
-  display: inline-grid; gap: 14px; justify-items: start; text-align: left;
-  background: var(--panel); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 18px;
-}
+.subtitle { color: var(--muted); margin: 0 0 6px; letter-spacing: .12em; font-size: 18px; }
+.tagline { color: var(--accent); margin: 0 0 14px; letter-spacing: .18em; }
+.blurb { color: #bfb69a; margin: 0 auto 22px; max-width: 520px; font-size: 15px; line-height: 1.65; }
+#lobby-form { display: inline-grid; gap: 14px; justify-items: start; text-align: left; background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; }
 #lobby-form label { display: grid; gap: 6px; font-size: 13px; color: var(--muted); }
 #lobby-form input, #lobby-form select {
   background: #15130f; color: var(--text); border: 1px solid var(--border);
