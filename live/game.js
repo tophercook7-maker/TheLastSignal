@@ -405,7 +405,7 @@ const Game = {
 
   onEvent(evt) {
     const s = this.state;
-    if (evt.type === "setFlag") s.flags[evt.key] = evt.value;
+    if (evt.type === "setFlag") s.flags[evt.key] = evt.value !== undefined ? evt.value : true;
     if (evt.type === "addItem") s.inventory.add(evt.item);
     if (evt.type === "removeItem") s.inventory.delete(evt.item);
     if (evt.type === "broadcast") this.broadcast(evt.text);
