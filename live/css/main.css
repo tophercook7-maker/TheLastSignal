@@ -60,8 +60,9 @@ nav#menu button {
 }
 nav#menu button:hover { border-color: var(--accent); color: var(--accent); }
 
-.view { display: none; }
-.view.active { display: block; }
+#app main .view { display: none; }
+#app main .view.active { display: block; }
+#hud.view.active { display: grid; }
 
 /* Lobby */
 #lobby { text-align: center; padding-top: 18vh; }
@@ -90,6 +91,30 @@ nav#menu button:hover { border-color: var(--accent); color: var(--accent); }
 }
 .primary:hover { filter: brightness(1.05); }
 .note { color: var(--muted); font-size: 12px; margin-top: 14px; }
+.hud-help { color: var(--muted); font-size: 12px; margin: 8px 0 10px; }
+
+/* Objectives */
+#objectives {
+  background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 12px;
+}
+#objectives-title { font-size: 12px; color: var(--muted); letter-spacing: .18em; margin-bottom: 8px; }
+#objectives-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+#objectives-list .objective { display: flex; align-items: center; gap: 10px; font-size: 14px; }
+#objectives-list .objective .objective-marker { color: var(--muted); }
+#objectives-list .objective.done { color: var(--success); }
+#objectives-list .objective.done .objective-marker { color: var(--success); }
+
+/* Tip banner */
+#tip-banner {
+  display: block;
+  position: sticky; top: 56px; z-index: 60;
+  background: #251c10; color: var(--accent);
+  border: 1px solid var(--border); border-radius: 10px;
+  padding: 10px 12px; font-size: 14px; margin: 10px 0;
+  box-shadow: 0 6px 25px rgba(0,0,0,.35);
+}
+#tip-banner.hidden { display: none; }
 
 /* HUD */
 #hud { display: grid; gap: 12px; }

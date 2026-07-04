@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>THE LAST SIGNAL</title>
   <meta name="description" content="A multiplayer text-based suspense adventure. Cooperate across research stations before time runs out." />
-  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/main.css?v=3" />
 </head>
 <body>
   <div id="app">
@@ -16,6 +16,7 @@
     </header>
 
     <nav id="menu" class="hidden">
+      <button data-action="help">How to Play</button>
       <button data-action="save">Save</button>
       <button data-action="load">Load</button>
       <button data-action="restart">Restart Mission</button>
@@ -45,29 +46,36 @@
           </label>
           <button type="submit" class="primary">Connect to Station</button>
         </form>
-        <p class="note">Same-device/network tabs sync via BroadcastChannel.</p>
+        <p class="note">Open multiple tabs as different stations to test multiplayer. Your progress saves automatically as you play.</p>
       </section>
 
-      <!-- HUD: mission brief, contacts, channel -->
+      <!-- HUD: mission brief, contacts, channel, objectives -->
       <section id="hud" class="view">
-        <div id="mission-clock">
-          <div id="clock-label">MISSION TIME</div>
-          <div id="clock-value">06:00:00</div>
-          <div id="clock-eta">T-MINUS 6:00</div>
-        </div>
-        <div id="comms">
-          <div id="comms-header">
-            <span>INTER-STATION CHANNEL</span>
-            <button id="comms-toggle" title="Toggle">▾</button>
+        <div id="hud-inner">
+          <div id="mission-clock">
+            <div id="clock-label">MISSION TIME</div>
+            <div id="clock-value">06:00:00</div>
+            <div id="clock-eta">T-MINUS 6:00</div>
           </div>
-          <ul id="comms-log"></ul>
-          <form id="comms-form">
-            <input id="comms-input" placeholder="Broadcast to all stations…" maxlength="200" />
-            <button type="submit">Send</button>
-          </form>
+          <div id="objectives">
+            <div id="objectives-title">OBJECTIVES</div>
+            <ul id="objectives-list"></ul>
+          </div>
+          <div id="comms">
+            <div id="comms-header">
+              <span>INTER-STATION CHANNEL</span>
+              <button id="comms-toggle" title="Toggle">▾</button>
+            </div>
+            <p class="hud-help">Use this to coordinate with other players on AURORA-7, PINNACLE, MERIDIAN, TRIDENT, and HELIX. What you share can unlock better endings.</p>
+            <ul id="comms-log"></ul>
+            <form id="comms-form">
+              <input id="comms-input" placeholder="Broadcast to all stations…" maxlength="200" />
+              <button type="submit">Send</button>
+            </form>
+          </div>
+          <div id="station-contacts"></div>
         </div>
-        <div id="station-contacts"></div>
-      </div>
+      </section>
 
       <!-- Scene / choice engine -->
       <section id="scene" class="view">

@@ -152,6 +152,7 @@ const Contacts = {
       }
     });
     this.render();
+    Objectives.refresh();
   },
   render() {
     const el = $("#station-contacts");
@@ -167,6 +168,32 @@ const Contacts = {
         `<div class="role">${this.registry[station] || "Unknown"}</div>`;
       el.appendChild(div);
     });
+  },
+};
+
+/* ---------- objectives ---------- */
+const Objectives = {
+  list: [
+    { id: "connect", text: "Connect to your station", done: () => !!Game.state.station },
+    { id: "read_first", text: "Read the first scene", done: () => !!Game.state.scene && Game.state.scene !== "intro" },
+    { id: "broadcast_once", text: "Send one broadcast to all stations", done: () => (Game.state.broadcastEvents?.size || 0) > 0 },
+    { id: "share_findings", text: "Share at least one key finding", done: () => Object.values(Game.state.flags || {}).some(Boolean) },
+    { id: "check_ending", text: "Check mission outcome before time runs out", done: () => false },
+  ],
+  render() {
+    const ul = $("#objectives-list");
+    if (!ul) return;
+    ul.innerHTML = "";
+    this.list.forEach((item) => {
+      const li = document.createElement("li");
+      const done = !!item.done();
+      li.className = `objective ${done ? "done" : ""}`;
+      li.innerHTML = `<span class="objective-marker">${done ? "●" : "○"}</span><span>${item.text}</span>`;
+      ul.appendChild(li);
+    });
+  },
+  refresh() {
+    this.render();
   },
 };
 
@@ -218,6 +245,7 @@ class SceneEngine {
         <span>Saved autos</span>
       `;
     }
+    Objectives.refresh();
 
     Game.addLog(`Scene → ${scene.location || sceneId}`);
   }
@@ -290,8 +318,15 @@ const Game = {
     const restored = Store.load();
     if (restored && restored.state && restored.state.station) {
       this.state = restored.state;
-      this.enterStation(this.state.station, this.state.callsign, false);
-      this.engine.render(this.state.scene || "intro");
+      Stations.load(this.state.station).then(() => {
+        this.enterStation(this.state.station, this.state.callsign, false);
+        this.engine.render(this.state.scene || "intro");
+        Objectives.refresh();
+      }).catch(() => {
+        this.enterStation(this.state.station, this.state.callsign, false);
+        this.engine.render("intro");
+        Objectives.refresh();
+      });
     } else {
       this.show("lobby");
     }
@@ -310,6 +345,7 @@ const Game = {
         return;
       }
       this.enterStation(station, callsign, true);
+      Objectives.refresh();
       this.engine.render("intro");
     });
 
@@ -323,8 +359,9 @@ const Game = {
     this.state.callsign = callsign;
     this.state.scene = fresh ? "intro" : this.state.scene;
     $("#station-id").textContent = `${station} // ${callsign}`;
-    this.show("hud");
+    this.tab("scene");
     this.renderScene();
+    this.showTip("Tip: Use the Inter-Station Channel to share clues with other stations. Cooperation unlocks the best ending.");
     Comms.broadcast(`${callsign} online at ${station}`);
     BC.sendGlobal(`${callsign} connected to ${station}.`);
     this.addLog(`Connected to ${station} as ${callsign}`);
@@ -381,6 +418,10 @@ const Game = {
           }
         } else if (action === "about") {
           modal("About", "THE LAST SIGNAL — by Topher Cook\nMultiplayer text suspense adventure.\nNo horror. No blood. No profanity.");
+        } else if (action === "help") {
+          modal("How to Play", "1) Choose a station and enter a callsign.\n2) Read the scene, then pick a choice.\n3) Use the bottom tabs: HQ, Ops, Logs, More.\n4) Use Inter-Station Channel to coordinate with other stations.\n5) Share findings. The ending depends on cooperation.\n\nTips:\n- Open multiple tabs as different stations to test multiplayer.\n- Your progress autosaves locally.\n- Menu → Save/Load anytime.\n- The clock is your deadline.", [
+            { label: "Got it", fn: () => {} }
+          ]);
         }
         $("#menu").classList.add("hidden");
       });
@@ -440,11 +481,15 @@ const Game = {
       }
       this.end(useEnding);
     }
+    Objectives.refresh();
     Store.save();
   },
 
   broadcast(text) {
     Comms.broadcast(text);
+    if (!Game.state.broadcastEvents) Game.state.broadcastEvents = new Set();
+    Game.state.broadcastEvents.add(text);
+    Objectives.refresh();
   },
 
   end(endingId) {
@@ -484,6 +529,19 @@ function modal(title, body, actions = []) {
     wrap.appendChild(btn);
   });
   m.classList.remove("hidden");
+}
+
+function showTip(text, ms = 6000) {
+  let tip = $("#tip-banner");
+  if (!tip) {
+    tip = document.createElement("div");
+    tip.id = "tip-banner";
+    document.body.appendChild(tip);
+  }
+  tip.textContent = text;
+  tip.classList.remove("hidden");
+  clearTimeout(tip._timer);
+  tip._timer = setTimeout(() => tip.classList.add("hidden"), ms);
 }
 
 /* ---------- escape ---------- */
