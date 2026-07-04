@@ -1,0 +1,34 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "The Last Signal",
+  "version": "0.1.0",
+  "identifier": "com.tophercook.thelastsignal",
+  "build": {
+    "beforeDevCommand": "python3 -m http.server 8080 --directory live",
+    "devUrl": "http://localhost:8080",
+    "beforeBuildCommand": "",
+    "frontendDist": "../live"
+  },
+  "app": {
+    "withGlobalTauri": true,
+    "windows": [
+      {
+        "title": "The Last Signal",
+        "width": 1200,
+        "height": 800,
+        "resizable": true,
+        "fullscreen": false
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "macOS": {
+      "minimumSystemVersion": "13.0"
+    }
+  }
+}

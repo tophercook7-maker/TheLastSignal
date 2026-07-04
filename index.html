@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>THE LAST SIGNAL</title>
+  <meta name="description" content="A multiplayer text-based suspense adventure. Cooperate across research stations before time runs out." />
+  <link rel="stylesheet" href="live/css/main.css" />
+</head>
+<body>
+  <div id="app">
+    <header id="top-bar">
+      <div id="station-id">NO STATION</div>
+      <div id="clock">--:--</div>
+      <button id="menu-btn" title="Menu">☰</button>
+    </header>
+
+    <nav id="menu" class="hidden">
+      <button data-action="save">Save</button>
+      <button data-action="load">Load</button>
+      <button data-action="restart">Restart Mission</button>
+      <button data-action="about">About</button>
+    </nav>
+
+    <main id="screen">
+      <!-- Boot / lobby / station select -->
+      <section id="lobby" class="view active">
+        <h1>THE LAST SIGNAL</h1>
+        <p class="subtitle">Cooperate. Decode. Survive.</p>
+        <form id="lobby-form">
+          <label>
+            Callsign
+            <input id="callsign" maxlength="12" placeholder="e.g. ROGER-9" required />
+          </label>
+          <label>
+            Station
+            <select id="station-select" required>
+              <option value="">Choose station…</option>
+              <option value="AURORA-7">AURORA-7 — Arctic Communications</option>
+              <option value="PINNACLE">PINNACLE — Mountain Signal Analysis</option>
+              <option value="MERIDIAN">MERIDIAN — Desert Data Decryption</option>
+              <option value="TRIDENT">TRIDENT — Oceanic Systems Engineering</option>
+              <option value="HELIX">HELIX — Orbital Mission Coordination</option>
+            </select>
+          </label>
+          <button type="submit" class="primary">Connect to Station</button>
+        </form>
+        <p class="note">Same-device/network tabs sync via BroadcastChannel.</p>
+      </section>
+
+      <!-- HUD: mission brief, contacts, channel -->
+      <section id="hud" class="view">
+        <div id="mission-clock">
+          <div id="clock-label">MISSION TIME</div>
+          <div id="clock-value">06:00:00</div>
+          <div id="clock-eta">T-MINUS 6:00</div>
+        </div>
+        <div id="comms">
+          <div id="comms-header">
+            <span>INTER-STATION CHANNEL</span>
+            <button id="comms-toggle" title="Toggle">▾</button>
+          </div>
+          <ul id="comms-log"></ul>
+          <form id="comms-form">
+            <input id="comms-input" placeholder="Broadcast to all stations…" maxlength="200" />
+            <button type="submit">Send</button>
+          </form>
+        </div>
+        <div id="station-contacts"></div>
+      </div>
+
+      <!-- Scene / choice engine -->
+      <section id="scene" class="view">
+        <div id="scene-location"></div>
+        <div id="scene-text"></div>
+        <div id="scene-choices"></div>
+        <div id="scene-status"></div>
+      </section>
+
+      <!-- Event modal -->
+      <div id="modal" class="hidden">
+        <div id="modal-backdrop"></div>
+        <div id="modal-box">
+          <div id="modal-title"></div>
+          <div id="modal-body"></div>
+          <div id="modal-actions"></div>
+        </div>
+      </div>
+
+      <!-- Terminal / logs -->
+      <section id="terminal" class="view hidden">
+        <div id="terminal-header">STATION LOG</div>
+        <ul id="terminal-log"></ul>
+      </section>
+
+      <!-- Settings / extras -->
+      <section id="settings" class="view hidden">
+        <h2>Settings</h2>
+        <label class="toggle">
+          <input type="checkbox" id="fx-audio" />
+          <span>Subtle audio</span>
+        </label>
+        <label class="toggle">
+          <input type="checkbox" id="animations" checked />
+          <span>Animations</span>
+        </label>
+        <label class="toggle">
+          <input type="checkbox" id="reduce-motion" />
+          <span>Reduce motion</span>
+        </label>
+      </section>
+
+      <!-- Endings -->
+      <section id="ending" class="view">
+        <h2 id="ending-title"></h2>
+        <div id="ending-text"></div>
+        <div id="ending-stats"></div>
+        <button id="ending-restart" class="primary">Launch New Mission</button>
+      </section>
+    </main>
+
+    <footer id="tab-bar">
+      <button data-tab="hud" class="active">HQ</button>
+      <button data-tab="scene">Ops</button>
+      <button data-tab="terminal">Logs</button>
+      <button data-tab="settings">More</button>
+    </footer>
+  </div>
+
+  <script src="live/game.js"></script>
+</body>
+</html>
