@@ -76,6 +76,10 @@ nav#menu button:hover { border-color: var(--accent); color: var(--accent); }
 .subtitle { color: var(--muted); margin: 0 0 6px; letter-spacing: .12em; font-size: 18px; }
 .tagline { color: var(--accent); margin: 0 0 14px; letter-spacing: .18em; }
 .blurb { color: #bfb69a; margin: 0 auto 22px; max-width: 520px; font-size: 15px; line-height: 1.65; }
+.lobby-panels { display: grid; gap: 14px; max-width: 860px; margin: 0 auto 22px; text-align: left; }
+.panel { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; }
+.panel h2 { margin: 0 0 8px; font-size: 16px; color: var(--accent); }
+.panel p { margin: 0 0 8px; color: #bfb69a; font-size: 14px; line-height: 1.55; }
 #lobby-form { display: inline-grid; gap: 14px; justify-items: start; text-align: left; background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; }
 #lobby-form label { display: grid; gap: 6px; font-size: 13px; color: var(--muted); }
 #lobby-form input, #lobby-form select {
@@ -186,6 +190,11 @@ nav#menu button:hover { border-color: var(--accent); color: var(--accent); }
   margin-top: 10px; color: var(--muted); font-size: 12px;
   display: flex; justify-content: space-between;
 }
+.scene-tutorial {
+  background: #261e10; color: var(--accent);
+  border: 1px dashed var(--border); border-radius: 10px;
+  padding: 10px 12px; font-size: 14px; margin-bottom: 10px;
+}
 
 /* Terminal */
 #terminal-header {
@@ -230,6 +239,12 @@ nav#menu button:hover { border-color: var(--accent); color: var(--accent); }
   background: var(--panel); border: 1px solid var(--border); border-radius: 10px;
   padding: 10px 12px; cursor: pointer;
 }
+
+/* Mission */
+#mission { display: grid; gap: 12px; }
+#mission h2 { color: var(--accent); }
+#mission p { color: #bfb69a; }
+#mission .primary { width: fit-content; }
 
 /* Endings */
 #ending-title { color: var(--accent); }

@@ -214,19 +214,31 @@ class SceneEngine {
 
     const loc = $("#scene-location");
     const text = $("#scene-text");
+    const help = $("#scene-help");
     const choices = $("#scene-choices");
     const status = $("#scene-status");
 
     if (loc) loc.textContent = `${localStation()} — ${scene.location || "UNKNOWN"}`;
     if (text) text.textContent = scene.text;
+    if (help) {
+      const firstTime = !(Game.state.flags && Game.state.flags["tutorial_seen"]);
+      help.innerHTML = firstTime
+        ? `<div class="scene-tutorial">First time here? Open the menu ☰ → Mission or How to Play. Open multiple tabs as different stations to cooperate.</div>`
+        : "";
+    }
 
     if (choices) {
       choices.innerHTML = "";
+      let firstChoice = true;
       (scene.choices || []).forEach((c) => {
         const btn = document.createElement("button");
         btn.className = "choice";
         btn.innerHTML = `<div>${escapeHtml(c.text)}</div>${c.hint ? `<div class="hint">${escapeHtml(c.hint)}</div>` : ""}`;
         btn.addEventListener("click", () => {
+          if (firstChoice && !Game.state.flags["tutorial_seen"]) {
+            Game.onEvent({ type: "setFlag", key: "tutorial_seen" });
+            firstChoice = false;
+          }
           const next = typeof c.next === "function" ? c.next(Game.state, payload) : c.next;
           const event = typeof c.event === "function" ? c.event(Game.state) : c.event || null;
           if (event) {
@@ -390,6 +402,9 @@ const Game = {
         this.tab(btn.dataset.tab);
       });
     });
+    $$("button[data-return]").forEach((btn) => {
+      btn.addEventListener("click", () => this.tab("hud"));
+    });
   },
 
   bindMenu() {
@@ -399,7 +414,9 @@ const Game = {
     $$("#menu button").forEach((btn) => {
       btn.addEventListener("click", () => {
         const action = btn.dataset.action;
-        if (action === "save") {
+        if (action === "mission") {
+          Game.show("mission");
+        } else if (action === "save") {
           Store.save();
           alert("Mission saved.");
         } else if (action === "load") {

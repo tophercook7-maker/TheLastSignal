@@ -8,7 +8,7 @@ const AURORA7 = {
     intro: {
       location: "SVALBARD ARCTIC — AURORA-7",
       text:
-        "The antenna array groans as wind scours the ice. Inside, the main console flickers with a signal that shouldn't exist: five simultaneous bursts, identical down to the microsecond.\n\nYour station handles outbound communications for the entire arctic network. Right now, every channel except internal is dead.\n\nThe signal contains coordinates. A date. And five words.",
+        "You are station AURORA-7 in the arctic. Right now, five stations around the world just received the same impossible signal.\\n\\nYou can: read the story, pick choices, and talk to your other stations in the Inter-Station Channel below.\\n\\nTip: open another tab as a different station to test cooperation. Your ending depends on what the group shares before time runs out.",
       choices: [
         {
           id: "c1",
