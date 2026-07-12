@@ -1,0 +1,13 @@
+{
+  "name": "answering-the-dark",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Answering the Dark — a first-contact ops game (Tauri 2, desktop + iOS + Android).",
+  "scripts": {
+    "tauri": "tauri",
+    "relay": "node server/relay.js"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2.11.2"
+  }
+}

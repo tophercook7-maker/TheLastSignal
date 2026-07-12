@@ -1,0 +1,19 @@
+# Answering the Dark — share-code relay (Fly.io)
+# Deploy:  cd server && fly launch --now --name answering-the-dark-relay
+#   (or, after first launch:  fly deploy)
+# The client (live/mc/config.js) points MC.RELAY_URL at wss://answering-the-dark-relay.fly.dev
+app = "answering-the-dark-relay"
+primary_region = "iad"
+
+[build]
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = "off"     # keep the relay awake — realtime multiplayer
+  auto_start_machines = true
+  min_machines_running = 1
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "256mb"

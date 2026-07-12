@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "The Last Signal",
-  "version": "0.1.0",
-  "identifier": "com.tophercook.thelastsignal",
+  "productName": "Answering the Dark",
+  "version": "1.0.0",
+  "identifier": "com.tophercook.answeringthedark",
   "build": {
     "beforeDevCommand": "python3 -m http.server 8080 --directory live",
     "devUrl": "http://localhost:8080",
@@ -13,7 +13,7 @@
     "withGlobalTauri": true,
     "windows": [
       {
-        "title": "The Last Signal",
+        "title": "Answering the Dark",
         "width": 1200,
         "height": 800,
         "resizable": true,
@@ -27,8 +27,14 @@
   "bundle": {
     "active": true,
     "targets": "all",
+    "category": "Games",
+    "shortDescription": "A first-contact ops game. Answer the dark, right.",
+    "longDescription": "You are Deepwatch, humanity's deep-space mission control. Your vessel AURORA hears a signal from where nothing should be. Decode it, understand it, and decide what to say back. A hopeful, wondrous first-contact adventure for one commander or a crew — no violence, just the dark and a friend in it.",
     "macOS": {
       "minimumSystemVersion": "13.0"
+    },
+    "iOS": {
+      "developmentTeam": "NFS22LSQRC"
     }
   }
 }

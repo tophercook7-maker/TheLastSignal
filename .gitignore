@@ -1,0 +1,24 @@
+# OS
+.DS_Store
+
+# Dependencies
+node_modules/
+
+# Build outputs / signed artifacts
+dist/
+src-tauri/target/
+
+# Tauri-generated native projects — regenerate with `tauri ios init` / `tauri android init`.
+# Also contains signing config (keystore.properties) that must never be published.
+src-tauri/gen/
+
+# Media / large binaries
+*.mp4
+
+# Local ops runbook — holds Apple team / ASC key / issuer identifiers; keep off the public repo
+SHIPPING.md
+
+# Secrets (belt-and-suspenders; these live outside the repo but never commit them)
+*.p8
+*.jks
+keystore.properties

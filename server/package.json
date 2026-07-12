@@ -1,0 +1,13 @@
+{
+  "name": "last-signal-relay",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Share-code WebSocket relay for The Last Signal (join a mission from anywhere).",
+  "main": "relay.js",
+  "scripts": {
+    "start": "node relay.js"
+  },
+  "dependencies": {
+    "ws": "^8.21.0"
+  }
+}
