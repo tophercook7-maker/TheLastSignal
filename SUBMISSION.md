@@ -25,13 +25,14 @@ Metadata (copy-paste ready): `STORE_LISTING.md`
 
 ---
 
-## ⚠️ Two gaps to close before/at submit
-1. **Privacy policy URL** — both stores require a *public* URL. `PRIVACY.md` is written
-   but not hosted. Fastest: enable GitHub Pages on this repo and link the rendered file,
-   or drop it on one of your sites. (Say the word and I'll wire GitHub Pages.)
-2. **Google phone screenshots are low-res** (756×469). They pass Google's 320px minimum
-   but look weak. Better to regenerate at 1080×1920 from the running app — I can script
-   that with headless Chrome when you want.
+## ✅ Both gaps now closed
+1. **Privacy policy URL** — hosted via GitHub Pages from `docs/`:
+   **https://tophercook7-maker.github.io/TheLastSignal/privacy.html**
+   Paste this into both stores' privacy-policy field. (Give Pages a couple minutes to
+   build after the first push.)
+2. **Google phone screenshots** — regenerated at **1080×1920** (9:16, within Google's 2:1
+   max) from the real game screens: `dist/play-assets/phone-1-lobby.png`,
+   `phone-2-mission.png`, `phone-3-ending.png`. Upload these three.
 
 ---
 
@@ -75,7 +76,7 @@ share-code co-op uses this relay. Nothing to do unless it needs redeploy:
 - [x] Apple + iPad screenshots · Google feature graphic + icon
 - [x] Listing copy · privacy policy text · upload script
 - [x] Relay live
-- [ ] Privacy policy hosted at a public URL  ← gap #1
-- [ ] Google phone screenshots at 1080×1920  ← gap #2 (optional polish)
+- [x] Privacy policy hosted → https://tophercook7-maker.github.io/TheLastSignal/privacy.html
+- [x] Google phone screenshots at 1080×1920 (`dist/play-assets/phone-*.png`)
 - [ ] Apple: create record → upload build → submit  ← your login
 - [ ] Google: create app → upload .aab → submit  ← your login
