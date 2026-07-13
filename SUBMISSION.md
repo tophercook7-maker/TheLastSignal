@@ -1,8 +1,19 @@
 # Answering the Dark — Store Submission Runbook
 
-Everything is built and staged. The remaining steps split into **things I already
+> **STATUS (2026-07-12): submission is already IN FLIGHT — this is not a from-scratch guide.**
+> - **Apple:** app record created, build 1.0.0 uploaded, **submitted 07-11**, came back
+>   "info needed", **replied 07-12 with a demo video → back in review.** Nothing to do but wait.
+> - **Google Play:** store listing done; build in Internal testing; **app-content forms are
+>   ~1 of 13 done** (privacy → content rating → target audience → data safety → etc.) + set price.
+>   That's the real remaining work.
+> - **Privacy URL already used in both filings:** `https://answering-the-dark-relay.fly.dev/privacy`
+>   (the GitHub Pages one below is a redundant spare.)
+>
+> The steps below are the full reference; skip what's already done above.
+
+Everything is built and staged. The remaining steps split into **things already
 prepped** (below) and **account-gated clicks only you can do** (need your Apple /
-Google logins). Follow this top to bottom.
+Google logins).
 
 App: **Answering the Dark** · bundle `com.tophercook.answeringthedark` · v1.0.0 · Paid **$2.99**
 
